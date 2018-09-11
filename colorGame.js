@@ -5,6 +5,18 @@ var squares = document.querySelectorAll(".square");
 var pickedColor = pickColor();
 var colorDisplay = document.getElementById("colorDisplay");
 var h1 = document.querySelector("h1");
+var resetButton = document.querySelector("#reset");
+
+resetButton.addEventListener("click", function() {
+	colors = generateRandomColors(6);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	for (var i = 0; i < squares.length; i++) {
+		//add initial colors to squares
+		squares[i].style.backgroundColor = colors[i];
+	}
+	h1.style.backgroundColor = window.getComputedStyle(document.body).getPropertyValue('background-color');
+});
 
 colorDisplay.textContent = pickedColor;
 
