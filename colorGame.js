@@ -7,48 +7,38 @@ var pickedColor = pickColor();
 var colorDisplay = document.getElementById("colorDisplay");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
-var easyBtn = document.querySelector("#easyBtn");
-var hardBtn = document.querySelector("#hardBtn");
+var modeButtons = document.querySelectorAll(".mode");
 
-easyBtn.addEventListener("click", function() {
-	easyBtn.classList.add("selected");
-	hardBtn.classList.remove("selected");
-	numSquares = 3;
-	colors = generateRandomColors(numSquares);
-	pickedColor = pickColor();
+for (var i = 0; i < modeButtons.length; i++) {
+	modeButtons[i].addEventListener("click", function() {
+		modeButtons[0].classList.remove("selected");
+		modeButtons[1].classList.remove("selected");
+		this.classList.add("selected");
 
-	for (var i = 0; i < squares.length; i++) {
-		if (colors[i]) {
-			squares[i].style.background = colors[i];
-		}
-		else {
-			squares[i].style.display = "none";
-		}
-	}
-});
+		this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+		reset();
+	});
+}
 
-hardBtn.addEventListener("click", function() {
-	hardBtn.classList.add("selected");
-	easyBtn.classList.remove("selected");
-	numSquares = 6;
-	colors = generateRandomColors(numSquares);
-	pickedColor = pickColor();
-
-	for (var i = 0; i < squares.length; i++) {
-		squares[i].style.background = colors[i];
-		squares[i].style.display = "block";
-		}
-});
-
-resetButton.addEventListener("click", function() {
+function reset() {
 	colors = generateRandomColors(numSquares);
 	pickedColor = pickColor();
 	colorDisplay.textContent = pickedColor;
+	resetButton.textContent = "New Colors";
 	for (var i = 0; i < squares.length; i++) {
-		//add initial colors to squares
-		squares[i].style.backgroundColor = colors[i];
+		if (colors[i]) {
+			squares[i].style.display = "block";
+			squares[i].style.background = colors[i]
+		}
+		else {
+			squares[i].style.display = "none";
+		}	
 	}
-	h1.style.backgroundColor = window.getComputedStyle(document.body).getPropertyValue('background-color');
+	h1.style.backgroundColor = "steelblue";
+}
+
+resetButton.addEventListener("click", function() {
+	reset();
 });
 
 colorDisplay.textContent = pickedColor;
@@ -66,6 +56,7 @@ for (var i = 0; i < squares.length; i++) {
 		if (clickedColor === pickedColor){
 			messageDisplay.textContent = "Correct";
 			changeColors(clickedColor);
+			reset.textContent = "Play Again?"
 		}
 		else {
 			//document.body.style represents inline styles in the body NOT the style given in colorGame.css

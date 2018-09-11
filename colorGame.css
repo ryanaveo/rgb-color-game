@@ -26,6 +26,7 @@ button {
 	letter-spacing: 1px;
 	font-size: inherit;
 	transition: all 0.3s;
+	outline: none;
 }
 
 button:hover {
@@ -69,4 +70,5 @@ button:hover {
 
 .selected {
 	color: white;
-	background: steelblue;}
+	background: steelblue;
+}
