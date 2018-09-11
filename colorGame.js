@@ -1,16 +1,10 @@
-var colors = [
-	"rgb(255, 0, 0)",
-	"rgb(255, 255, 0)",
-	"rgb(0, 255, 0)",
-	"rgb(0, 255, 255)",
-	"rgb(0, 0, 255)",
-	"rgb(255, 0, 0)"
-]
+var colors = generateRandomColors(6);
 
 var squares = document.querySelectorAll(".square");
 // pick a random color from colors
 var pickedColor = pickColor();
 var colorDisplay = document.getElementById("colorDisplay");
+var h1 = document.querySelector("h1");
 
 colorDisplay.textContent = pickedColor;
 
@@ -37,15 +31,32 @@ for (var i = 0; i < squares.length; i++) {
 	});
 }
 
-//change all squares backgroundColor to color
+//change all squares backgroundColor to color. Change h1 backgroundColor to color as well
 function changeColors(color) {
 	// loop through all squares
 	for (var i = 0; i < squares.length; i++) {
 		squares[i].style.backgroundColor = color;
 	}
+	h1.style.backgroundColor = color;
 }
 //return a random color
 function pickColor() {
 	var index = Math.floor(Math.random() * colors.length);
 	return colors[index];
+}
+// return an array of strings that represent rgb values with length num
+function generateRandomColors(num) {
+	var arr = []
+	for (var i = 0; i < num; i++) {
+		arr[i] = getRandomColor();
+	}
+	return arr;
+}
+function getRandomColor() {
+	// pick red, green, and blue from 0-255
+	var r = Math.floor(Math.random() * 256)
+	var g = Math.floor(Math.random() * 256)
+	var b = Math.floor(Math.random() * 256)
+	// using template string
+	return `rgb(${r}, ${g}, ${b})`;
 }
